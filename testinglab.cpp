@@ -1,3 +1,5 @@
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
 #include "cache.hh"
 #include <iostream>
 #include <functional>
@@ -209,4 +211,16 @@ void Cache::del(key_type key) {
 // Compute the total amount of memory used up by all cache values (not keys)
 Cache::index_type Cache::space_used() const {
     return pImpl_->space_used();
+}
+
+TEST_CASE("Create cache and get value.","[single-file]")
+{
+    const Cache::key_type key1 = "one";
+    const int val = 1;
+    const Cache::val_type point1 = &val;
+    const Cache::index_type size = sizeof(val);
+    Cache new_cache(1000);
+    new_cache.set(key1, point1, size);
+
+
 }
